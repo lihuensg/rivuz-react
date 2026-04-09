@@ -71,4 +71,26 @@
     .copyright-col {
         text-align: left;
     }
+
+    .footer-logo {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-section {
+        padding: 20px 0;
+    }
+
+    .footer-logo {
+        font-size: 1.8rem;
+    }
+
+    .brand-desc {
+        font-size: 0.9rem;
+    }
+
+    .copyright {
+        font-size: 0.8rem;
+    }
 }

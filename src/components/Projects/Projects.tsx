@@ -45,8 +45,8 @@ const Projects: React.FC = () => {
   ];
 
   return (
-    <section className="bg-background min-h-[600px] text-foreground overflow-hidden w-full relative pb-10" id="projects">
-      <div className="h-[250px] flex flex-col items-center justify-center space-y-4 pt-16 z-10 relative">
+    <section className="bg-background min-h-[400px] sm:min-h-[600px] text-foreground overflow-hidden w-full relative pb-10" id="projects">
+      <div className="h-[200px] sm:h-[250px] flex flex-col items-center justify-center space-y-4 pt-12 sm:pt-16 z-10 relative px-4">
         <div className="space-y-1 text-center" data-aos="fade-up">
           <span className="section-tag mb-4">
             Logros
@@ -56,11 +56,11 @@ const Projects: React.FC = () => {
           </h2>
           <p className="section-subtitle">Casos de éxito donde nuestra ingeniería transformó visión en rentabilidad.</p>
         </div>
-        <div className="animate-bounce text-primary text-xs mt-6 font-medium">↓ Desliza y pasa el mouse sobre ellas</div>
+        <div className="animate-bounce text-primary text-xs mt-4 sm:mt-6 font-medium text-center">↓ Desliza y pasa el mouse sobre ellas</div>
       </div>
 
       <RadialScrollGallery
-        className="!min-h-[700px] mt-4"
+        className="!min-h-[500px] sm:!min-h-[700px] mt-4"
         baseRadius={320}   /* Radio reducido para que estén más juntas */
         mobileRadius={180}
         visiblePercentage={60}
