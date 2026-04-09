@@ -42,6 +42,7 @@ const Header: React.FC = () => {
           <a href="#projects">Proyectos</a>
           <a href="#pricing">Precios</a>
           <a href="#testimonials">Clientes</a>
+          <a href="#nosotros">Nosotros</a>
           <a href="#contact" className="btn btn-primary btn-sm">
             <span>Contacto</span>
           </a>

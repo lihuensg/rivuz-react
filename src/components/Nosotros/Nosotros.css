@@ -1,0 +1,328 @@
+/* ─── Nosotros Section ─── */
+.nosotros-section {
+  background-color: var(--bg-secondary);
+  padding: 120px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle ambient glow */
+.nosotros-section::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0, 179, 255, 0.06), transparent 70%);
+  pointer-events: none;
+}
+
+/* ─── Two-Column Layout ─── */
+.nosotros-content {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ─── Photo Composition (Left Side) ─── */
+.nosotros-photos {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding: 20px;
+  align-items: start;
+}
+
+.photo-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  aspect-ratio: 3 / 4;
+}
+
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Staggered vertical offsets for visual interest */
+.photo-card:nth-child(1) {
+  margin-top: 0;
+}
+
+.photo-card:nth-child(2) {
+  margin-top: 40px;
+}
+
+.photo-card:nth-child(3) {
+  margin-top: 16px;
+}
+
+/* ─── Photo Hover States ─── */
+.photo-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(11, 31, 59, 0.6) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+/* Active/highlighted state */
+.photo-card.active {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(0, 179, 255, 0.3);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(0, 179, 255, 0.1);
+  z-index: 10;
+}
+
+.photo-card.active img {
+  filter: brightness(1.08) saturate(1.1);
+}
+
+/* Dimmed state — when another card/name is hovered */
+.photo-card.dimmed {
+  filter: grayscale(0.7) brightness(0.6);
+  transform: scale(0.98);
+  opacity: 0.5;
+}
+
+.photo-card.dimmed::after {
+  opacity: 1;
+}
+
+/* ─── Team List (Right Side) ─── */
+.nosotros-team-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.team-member-item {
+  position: relative;
+  padding: 28px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.team-member-item:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Pill indicator */
+.member-indicator {
+  width: 4px;
+  height: 32px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.member-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.member-name {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  transition: all 0.4s ease;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.member-role {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 4px;
+  transition: all 0.4s ease;
+}
+
+/* Member number — subtle index */
+.member-number {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.1);
+  transition: all 0.4s ease;
+  flex-shrink: 0;
+}
+
+/* Social icons container */
+.member-socials {
+  display: flex;
+  gap: 10px;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+.member-socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(0, 179, 255, 0.1);
+  color: var(--primary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.member-socials a:hover {
+  background: rgba(0, 179, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ─── Active/Hover States for Team List ─── */
+.team-member-item.active {
+  background: rgba(0, 179, 255, 0.04);
+}
+
+.team-member-item.active .member-indicator {
+  background: var(--primary);
+  height: 40px;
+  box-shadow: 0 0 12px rgba(0, 179, 255, 0.4);
+}
+
+.team-member-item.active .member-name {
+  color: var(--primary);
+}
+
+.team-member-item.active .member-role {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.team-member-item.active .member-number {
+  color: var(--primary);
+  opacity: 0.6;
+}
+
+.team-member-item.active .member-socials {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Dimmed state for non-active items */
+.team-member-item.dimmed {
+  opacity: 0.35;
+}
+
+.team-member-item.dimmed .member-name {
+  color: var(--text-secondary);
+}
+
+/* ─── Responsive ─── */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .nosotros-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+
+  .photo-card:nth-child(2) {
+    margin-top: 30px;
+  }
+
+  .nosotros-photos {
+    gap: 14px;
+    padding: 10px;
+  }
+
+  .member-name {
+    font-size: 1.2rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .nosotros-section {
+    padding: 80px 0;
+  }
+
+  .nosotros-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .nosotros-photos {
+    max-width: 420px;
+    margin: 0 auto;
+    gap: 12px;
+    padding: 0;
+  }
+
+  .photo-card:nth-child(2) {
+    margin-top: 30px;
+  }
+
+  .photo-card:nth-child(3) {
+    margin-top: -10px;
+  }
+
+  .team-member-item {
+    padding: 22px 16px;
+  }
+
+  .member-name {
+    font-size: 1.15rem;
+  }
+
+  .member-socials {
+    /* Always visible on mobile since no hover */
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .nosotros-photos {
+    max-width: 320px;
+    gap: 10px;
+  }
+
+  .photo-card:nth-child(2) {
+    margin-top: 20px;
+  }
+
+  .member-name {
+    font-size: 1.05rem;
+  }
+
+  .member-role {
+    font-size: 0.8rem;
+  }
+}
