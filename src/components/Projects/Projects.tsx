@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './Projects.css';
 
 interface Project {
@@ -36,76 +36,47 @@ const Projects: React.FC = () => {
     },
   ];
 
-  const trackRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
+  const [modalIndex, setModalIndex] = useState<number | null>(null);
 
-  // Update active index on scroll
-  const handleScroll = useCallback(() => {
-    if (!trackRef.current) return;
-    const track = trackRef.current;
-    const cardWidth = track.querySelector('.project-card')?.clientWidth || 0;
-    const gap = 32;
-    const index = Math.round(track.scrollLeft / (cardWidth + gap));
-    setActiveIndex(Math.min(index, projects.length - 1));
-  }, [projects.length]);
+  const activeProject = projects[activeIndex];
 
+  // Autoplay orbital focus
   useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    track.addEventListener('scroll', handleScroll, { passive: true });
-    return () => track.removeEventListener('scroll', handleScroll);
-  }, [handleScroll]);
+    if (modalIndex !== null) return;
+    const timer = window.setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % projects.length);
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, [projects.length, modalIndex]);
 
-  // Mouse drag handlers
-  const onMouseDown = (e: React.MouseEvent) => {
-    if (!trackRef.current) return;
-    setIsDragging(true);
-    setStartX(e.pageX - trackRef.current.offsetLeft);
-    setScrollLeft(trackRef.current.scrollLeft);
-    trackRef.current.style.cursor = 'grabbing';
-    trackRef.current.style.scrollSnapType = 'none';
-  };
+  // Allow closing modal with Escape key
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setModalIndex(null);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
 
-  const onMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !trackRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - trackRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    trackRef.current.scrollLeft = scrollLeft - walk;
-  };
+  const goNext = () => setActiveIndex((prev) => (prev + 1) % projects.length);
+  const goPrev = () => setActiveIndex((prev) => (prev - 1 + projects.length) % projects.length);
 
-  const onMouseUp = () => {
-    setIsDragging(false);
-    if (!trackRef.current) return;
-    trackRef.current.style.cursor = 'grab';
-    trackRef.current.style.scrollSnapType = 'x mandatory';
-  };
-
-  // Navigate to specific card
-  const scrollToIndex = (index: number) => {
-    if (!trackRef.current) return;
-    const track = trackRef.current;
-    const card = track.querySelectorAll('.project-card')[index] as HTMLElement;
-    if (card) {
-      const trackRect = track.getBoundingClientRect();
-      const cardRect = card.getBoundingClientRect();
-      const offset = cardRect.left - trackRect.left + track.scrollLeft - (trackRect.width - cardRect.width) / 2;
-      track.scrollTo({ left: offset, behavior: 'smooth' });
-    }
-  };
-
-  const goNext = () => {
-    const next = Math.min(activeIndex + 1, projects.length - 1);
-    scrollToIndex(next);
-  };
-
-  const goPrev = () => {
-    const prev = Math.max(activeIndex - 1, 0);
-    scrollToIndex(prev);
-  };
+  const orbitItems = useMemo(() => {
+    const radius = 230;
+    const baseAngle = -90;
+    return projects.map((project, index) => {
+      const angleStep = 360 / projects.length;
+      const angle = baseAngle + (index - activeIndex) * angleStep;
+      const radians = (angle * Math.PI) / 180;
+      return {
+        ...project,
+        index,
+        x: Math.cos(radians) * radius,
+        y: Math.sin(radians) * radius,
+      };
+    });
+  }, [projects, activeIndex]);
 
   return (
     <section className="projects-section" id="projects">
@@ -117,77 +88,97 @@ const Projects: React.FC = () => {
             Casos de éxito donde nuestra ingeniería transformó visión en rentabilidad.
           </p>
         </div>
-      </div>
+        <div className="projects-orbit" data-aos="fade-up" data-aos-delay="200">
+          <button className="orbit-nav orbit-nav-prev" onClick={goPrev} aria-label="Proyecto anterior">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
 
-      {/* Carousel wrapper */}
-      <div className="projects-carousel-wrapper" data-aos="fade-up" data-aos-delay="200">
-        {/* Nav arrows — desktop */}
-        <button
-          className={`carousel-arrow carousel-arrow-prev ${activeIndex === 0 ? 'is-disabled' : ''}`}
-          onClick={goPrev}
-          aria-label="Proyecto anterior"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-        </button>
+          <button className="orbit-nav orbit-nav-next" onClick={goNext} aria-label="Proyecto siguiente">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polyline points="9 6 15 12 9 18" />
+            </svg>
+          </button>
 
-        <button
-          className={`carousel-arrow carousel-arrow-next ${activeIndex === projects.length - 1 ? 'is-disabled' : ''}`}
-          onClick={goNext}
-          aria-label="Proyecto siguiente"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="9 6 15 12 9 18" />
-          </svg>
-        </button>
+          <div className="orbit-rings" aria-hidden="true" />
 
-        {/* Scrollable track */}
-        <div
-          ref={trackRef}
-          className={`projects-track ${isDragging ? 'is-dragging' : ''}`}
-          onMouseDown={onMouseDown}
-          onMouseMove={onMouseMove}
-          onMouseUp={onMouseUp}
-          onMouseLeave={onMouseUp}
-        >
-          {projects.map((project, i) => (
-            <div
+          <div className="orbit-map" role="list" aria-label="Proyectos destacados">
+            {orbitItems.map((project) => (
+              <button
+                key={project.name}
+                type="button"
+                className={`orbit-node ${activeIndex === project.index ? 'is-active' : ''}`}
+                style={{
+                  transform: `translate(calc(-50% + ${project.x}px), calc(-50% + ${project.y}px))`,
+                }}
+                onClick={() => {
+                  setActiveIndex(project.index);
+                  setModalIndex(project.index);
+                }}
+                aria-label={`Abrir ${project.name}`}
+              >
+                <img src={project.image} alt={project.name} loading="lazy" />
+              </button>
+            ))}
+          </div>
+
+          <article className="project-spotlight glass-panel">
+            <div className="spotlight-image-wrap">
+              <img src={activeProject.image} alt={activeProject.name} className="spotlight-image" />
+            </div>
+
+            <div className="spotlight-content">
+              <span className="project-category">{activeProject.category}</span>
+              <h3 className="project-title">{activeProject.name}</h3>
+              <p className="project-desc">{activeProject.desc}</p>
+              <button type="button" className="spotlight-expand" onClick={() => setModalIndex(activeIndex)}>
+                Ver en grande
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <div className="projects-mobile-list" data-aos="fade-up" data-aos-delay="250">
+          {projects.map((project, index) => (
+            <button
               key={project.name}
-              className={`project-card ${activeIndex === i ? 'is-active' : ''}`}
+              type="button"
+              className={`mobile-project-card glass-panel ${activeIndex === index ? 'is-active' : ''}`}
+              onClick={() => {
+                setActiveIndex(index);
+                setModalIndex(index);
+              }}
             >
-              <div className="project-image-wrapper">
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="project-image"
-                  loading="lazy"
-                  draggable={false}
-                />
-                <div className="project-image-overlay" />
-              </div>
-
-              <div className="project-content">
+              <img src={project.image} alt={project.name} className="mobile-project-image" loading="lazy" />
+              <div className="mobile-project-content">
                 <span className="project-category">{project.category}</span>
                 <h3 className="project-title">{project.name}</h3>
-                <p className="project-desc">{project.desc}</p>
               </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Dot indicators */}
-        <div className="carousel-dots">
-          {projects.map((_, i) => (
-            <button
-              key={i}
-              className={`carousel-dot ${activeIndex === i ? 'is-active' : ''}`}
-              onClick={() => scrollToIndex(i)}
-              aria-label={`Ir al proyecto ${i + 1}`}
-            />
+            </button>
           ))}
         </div>
       </div>
+
+      {modalIndex !== null && (
+        <div className="project-modal-backdrop" onClick={() => setModalIndex(null)}>
+          <div className="project-modal glass-panel" onClick={(event) => event.stopPropagation()}>
+            <button type="button" className="project-modal-close" onClick={() => setModalIndex(null)} aria-label="Cerrar">
+              ×
+            </button>
+            <img
+              src={projects[modalIndex].image}
+              alt={projects[modalIndex].name}
+              className="project-modal-image"
+            />
+            <div className="project-modal-content">
+              <span className="project-category">{projects[modalIndex].category}</span>
+              <h3 className="project-title">{projects[modalIndex].name}</h3>
+              <p className="project-desc">{projects[modalIndex].desc}</p>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
