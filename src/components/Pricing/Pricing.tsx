@@ -59,7 +59,7 @@ const Pricing: React.FC = () => {
       <div className="container">
         <div className="section-header" data-aos="fade-up">
           <span className="section-tag">Escalabilidad flexible</span>
-          <h2 className="section-title">Impulsa tu Crecimiento</h2>
+          <h2 className="section-title">Impulsa tu <span className="text-gradient-muted">Crecimiento</span></h2>
           <p className="section-subtitle">
             Acompañamos el crecimiento de tu empresa con soluciones tecnológicas pensadas para cada etapa.
           </p>

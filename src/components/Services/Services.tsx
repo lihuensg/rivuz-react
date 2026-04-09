@@ -7,7 +7,9 @@ const Services: React.FC = () => {
       <div className="container">
         <div className="section-header" data-aos="fade-up">
           <span className="section-tag">Nuestros Servicios</span>
-          <h2 className="section-title">Soluciones tecnológicas que impulsan tu negocio</h2>
+          <h2 className="section-title">
+            Soluciones tecnológicas que <span className="text-gradient">impulsan tu negocio</span>
+          </h2>
           <p className="section-subtitle">
             Diseñamos y desarrollamos software, plataformas y soluciones digitales que optimizan procesos, conectan sistemas y ayudan a las empresas a crecer con tecnología confiable.
           </p>
