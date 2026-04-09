@@ -273,7 +273,6 @@ export default function VaporizeTextCycle({
       particlesRef,
       globalDpr,
       currentTextIndex,
-      transformedDensity,
     });
 
     const currentFont = font.fontFamily || "sans-serif";
@@ -285,7 +284,6 @@ export default function VaporizeTextCycle({
       particlesRef,
       globalDpr,
       currentTextIndex,
-      transformedDensity,
       framerProps: { texts, font, color, alignment },
     });
   }, [texts, font, color, alignment, wrapperSize, currentTextIndex, globalDpr, transformedDensity]);
@@ -306,7 +304,6 @@ export default function VaporizeTextCycle({
         particlesRef,
         globalDpr,
         currentTextIndex,
-        transformedDensity,
       });
     });
 
@@ -344,13 +341,13 @@ const SeoElement = memo(({ tag = Tag.P, texts }: { tag: TagType, texts: string[]
 });
 
 const handleFontChange = ({
-  currentFont, lastFontRef, canvasRef, wrapperSize, particlesRef, globalDpr, currentTextIndex, transformedDensity, framerProps
+  currentFont, lastFontRef, canvasRef, wrapperSize, particlesRef, globalDpr, currentTextIndex, framerProps
 }: any) => {
   if (currentFont !== lastFontRef.current) {
     lastFontRef.current = currentFont;
     const timeoutId = setTimeout(() => {
       cleanup({ canvasRef, particlesRef });
-      renderCanvas({ framerProps, canvasRef, wrapperSize, particlesRef, globalDpr, currentTextIndex, transformedDensity });
+      renderCanvas({ framerProps, canvasRef, wrapperSize, particlesRef, globalDpr, currentTextIndex });
     }, 1000);
     return () => { clearTimeout(timeoutId); cleanup({ canvasRef, particlesRef }); };
   }
@@ -365,7 +362,7 @@ const cleanup = ({ canvasRef, particlesRef }: any) => {
 };
 
 const renderCanvas = ({
-  framerProps, canvasRef, wrapperSize, particlesRef, globalDpr, currentTextIndex, transformedDensity
+  framerProps, canvasRef, wrapperSize, particlesRef, globalDpr, currentTextIndex
 }: any) => {
   const canvas = canvasRef.current;
   if (!canvas || !wrapperSize.width || !wrapperSize.height) return;
