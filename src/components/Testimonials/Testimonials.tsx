@@ -1,10 +1,12 @@
 import React from 'react';
 import './Testimonials.css';
+import { RatingInteraction } from '../ui/emoji-rating';
 
 interface Testimonial {
   quote: string;
   name: string;
   role: string;
+  rating: number;
 }
 
 const Testimonials: React.FC = () => {
@@ -12,17 +14,20 @@ const Testimonials: React.FC = () => {
     {
       quote: "Necesitábamos digitalizar procesos que hacíamos de manera manual y el cambio fue enorme. Nos desarrollaron un sistema a medida que mejoró nuestra organización, redujo errores y nos permitió ahorrar mucho tiempo en la operación diaria.",
       name: "Brian Charles Mengeón",
-      role: "BCM Products"
+      role: "BCM Products",
+      rating: 4
     },
     {
       quote: "Necesitaba gestionar varios proyectos al mismo tiempo y el equipo de Rivuz creo un sistema adecuado. Hoy mis clientes notan la diferencia.",
       name: "Sofia Caceres",
-      role: "SOCA STUDIO"
+      role: "SOCA STUDIO",
+      rating: 5
     },
     {
       quote: "Gracias a RIVUZ pudimos mejorar la gestión de nuestra barbería con una solución simple, ordenada y fácil de usar. Hoy trabajamos de forma más organizada y brindamos una mejor atención a nuestros clientes.",
       name: "Nazareno Wicky",
-      role: "NazaBarber"
+      role: "NazaBarber",
+      rating: 5
     }
   ];
 
@@ -55,6 +60,7 @@ const Testimonials: React.FC = () => {
                   <h4 className="client-name">{testimonial.name}</h4>
                   <p className="client-role">{testimonial.role}</p>
                 </div>
+                <RatingInteraction value={testimonial.rating} className="testimonial-rating" />
               </div>
             </div>
           ))}

@@ -36,13 +36,21 @@
     line-height: 1.7;
     color: var(--text-secondary);
     font-style: italic;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     flex-grow: 1;
+}
+
+.testimonial-rating {
+    margin-bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    flex-shrink: 0;
 }
 
 .client-meta {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+    justify-content: space-between;
     gap: 16px;
 }
 
@@ -109,5 +117,15 @@
 
     .client-role {
         font-size: 0.8rem;
+    }
+
+    .client-meta {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .testimonial-rating {
+        justify-content: flex-start;
     }
 }
