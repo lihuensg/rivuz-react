@@ -1,0 +1,119 @@
+.services-section {
+    background-color: var(--bg-secondary);
+    padding: 120px 0;
+    position: relative;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.section-title {
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.section-subtitle {
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    line-height: 1.6;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.service-card {
+    position: relative;
+    padding: 40px 30px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    transition: all 0.3s ease;
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid var(--glass-border);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.icon-wrapper {
+    margin-bottom: 24px;
+    display: inline-flex;
+    padding: 12px;
+    background: rgba(14, 165, 233, 0.1);
+    border-radius: 12px;
+}
+
+.service-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.service-card p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.service-card.featured {
+    border-color: var(--primary);
+    background: rgba(14, 165, 233, 0.15);
+    box-shadow: 0 0 10px var(--primary-glow);
+    transform: scale(1.02);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.card-top .icon-wrapper {
+    margin-bottom: 0;
+}
+
+.service-card.featured:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 0 50px var(--primary-glow);
+}
+
+.action-featured {
+    margin-top: auto;
+    width: 100%;
+    padding-top: 24px;
+}
+
+.action-featured .btn {
+    width: 100%;
+}
+
+@media (max-width: 992px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}

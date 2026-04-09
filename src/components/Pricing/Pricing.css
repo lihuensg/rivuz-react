@@ -1,0 +1,107 @@
+.pricing-section {
+    background-color: var(--bg-main);
+    padding: 120px 0;
+    position: relative;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: stretch;
+}
+
+.pricing-card {
+    padding: 48px 32px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pricing-card.recommended {
+    border-color: var(--primary);
+    background: rgba(0, 179, 255, 0.05);
+    transform: scale(1.05);
+    z-index: 2;
+}
+
+.badge-wrapper {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+}
+
+.badge {
+    background: var(--primary);
+    color: var(--bg-main);
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.plan-header {
+    margin-bottom: 32px;
+}
+
+.plan-name {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.plan-desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.features {
+    list-style: none;
+    margin-bottom: 40px;
+}
+
+.features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    line-height: 1.4;
+}
+
+.check {
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    margin-top: 2px;
+}
+
+.action-wrapper {
+    margin-top: auto;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+@media (max-width: 992px) {
+    .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .pricing-card.recommended {
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 768px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+}
