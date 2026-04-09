@@ -23,18 +23,30 @@
     align-items: center;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    min-width: 130px;
+    min-height: 40px;
+}
+
 .nav-logo {
     font-family: 'Outfit', sans-serif;
     font-size: 1.8rem;
     font-weight: 800;
     color: white;
     text-decoration: none;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     letter-spacing: -1px;
+    line-height: 1;
 }
 
-.nav-logo .dot {
+.nav-logo-mark {
+    color: white;
+}
+
+.nav-logo-dot {
     color: var(--primary);
     text-shadow: 0 0 15px var(--primary-glow);
 }
