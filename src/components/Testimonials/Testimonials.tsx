@@ -36,7 +36,7 @@ const Testimonials: React.FC = () => {
       <div className="container">
         <div className="section-header" data-aos="fade-up">
           <span className="section-tag">Testimonios</span>
-          <h2 className="section-title">Lo que dicen nuestros clientes</h2>
+          <h2 className="section-title">Lo que dicen <span className="text-gradient-muted">nuestros clientes</span></h2>
         </div>
 
         <div className="testimonials-grid">

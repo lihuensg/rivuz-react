@@ -75,6 +75,13 @@ section {
   background-clip: text;
 }
 
+.text-gradient-muted {
+  background: linear-gradient(135deg, #cfd8e6 0%, #a3afc0 46%, #6f7f97 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .section-tag {
   display: inline-block;
   padding: 8px 16px;
