@@ -60,7 +60,6 @@ const Testimonials: React.FC = () => {
                   <h4 className="client-name">{testimonial.name}</h4>
                   <p className="client-role">{testimonial.role}</p>
                 </div>
-                <RatingInteraction value={testimonial.rating} className="testimonial-rating" />
               </div>
             </div>
           ))}
