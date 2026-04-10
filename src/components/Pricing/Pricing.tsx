@@ -75,7 +75,7 @@ const Pricing: React.FC = () => {
             >
               {plan.recommended && (
                 <div className="badge-wrapper">
-                  <span className="badge">Más popular</span>
+                  <span className="badge">MÁS POPULAR</span>
                 </div>
               )}
               <div className="plan-header">
