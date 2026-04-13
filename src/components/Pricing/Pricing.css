@@ -1,6 +1,6 @@
 .pricing-section {
     background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1429 100%);
-    padding: 120px 0;
+    padding: 140px 0;
     position: relative;
     overflow: hidden;
 }
@@ -8,14 +8,14 @@
 .pricing-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    max-width: 1200px;
+    gap: 34px;
+    max-width: 1140px;
     margin: 0 auto;
     align-items: stretch;
 }
 
 .pricing-card {
-    padding: 48px 32px;
+    padding: 50px 34px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -23,7 +23,7 @@
     border: 2px solid rgba(80, 90, 120, 0.4);
     background: rgba(20, 25, 50, 0.8);
     backdrop-filter: blur(10px);
-    border-radius: 24px;
+    border-radius: 22px;
     overflow: visible;
 }
 
@@ -41,7 +41,7 @@
 .pricing-card:not(.recommended):hover {
     border-color: rgba(0, 179, 255, 0.25);
     background: rgba(25, 32, 60, 0.9);
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(0, 179, 255, 0.03);
 }
 
@@ -50,12 +50,12 @@
     border-width: 2px;
     background: rgba(0, 179, 255, 0.1);
     box-shadow: 0 0 40px rgba(0, 179, 255, 0.35), inset 0 0 30px rgba(0, 179, 255, 0.08);
-    transform: scale(1.08);
+    transform: scale(1.05);
     z-index: 2;
 }
 
 .pricing-card.recommended:hover {
-    transform: scale(1.08) translateY(-8px);
+    transform: scale(1.05) translateY(-6px);
     box-shadow: 0 30px 60px rgba(0, 179, 255, 0.4), inset 0 0 30px rgba(0, 179, 255, 0.12);
     border-color: #00d4ff;
 }
@@ -66,7 +66,7 @@
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     z-index: 10;
-    animation: badgePulse 2s ease-in-out infinite;
+    animation: badgePulse 2.4s ease-in-out infinite;
 }
 
 @keyframes badgePulse {
@@ -129,7 +129,7 @@
     color: rgba(255, 255, 255, 0.85);
     font-size: 0.9rem;
     margin-bottom: 16px;
-    line-height: 1.5;
+    line-height: 1.65;
     font-weight: 400;
     transition: color 0.3s ease;
 }
@@ -194,7 +194,7 @@
 
 @media (max-width: 992px) {
     .pricing-section {
-        padding: 100px 0;
+        padding: 112px 0;
     }
 
     .pricing-grid {
@@ -209,7 +209,7 @@
 
 @media (max-width: 768px) {
     .pricing-section {
-        padding: 80px 0;
+        padding: 94px 0;
     }
 
     .pricing-grid {
@@ -219,13 +219,13 @@
     }
 
     .pricing-card {
-        padding: 36px 28px;
+        padding: 40px 30px;
     }
 }
 
 @media (max-width: 480px) {
     .pricing-section {
-        padding: 60px 0;
+        padding: 76px 0;
     }
 
     .pricing-card {

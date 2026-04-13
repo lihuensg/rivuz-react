@@ -41,15 +41,6 @@ const Projects: React.FC = () => {
 
   const activeProject = projects[activeIndex];
 
-  // Autoplay orbital focus
-  useEffect(() => {
-    if (modalIndex !== null) return;
-    const timer = window.setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % projects.length);
-    }, 5000);
-    return () => window.clearInterval(timer);
-  }, [projects.length, modalIndex]);
-
   // Allow closing modal with Escape key
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
