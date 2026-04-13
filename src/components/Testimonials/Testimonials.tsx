@@ -1,6 +1,5 @@
 import React from 'react';
 import './Testimonials.css';
-import { RatingInteraction } from '../ui/emoji-rating';
 
 interface Testimonial {
   quote: string;
