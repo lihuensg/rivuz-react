@@ -3,164 +3,189 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding-top: 136px;
-    padding-bottom: 108px;
+    padding-top: 120px;
     overflow: hidden;
-    background: var(--bg-main);
+    background-color: var(--bg-main);
 }
 
-.hero-backdrop {
+/* Wider, more intense interactive reveal + horizontal fade for seamless edges */
+.river-container {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 1;
     pointer-events: none;
+    opacity: 0.8;
+    /* Combined Mask: Mouse Reveal + Edge Fading */
+    -webkit-mask-image:
+        radial-gradient(circle 600px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, rgba(0, 0, 0, 0.15) 100%),
+        linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    mask-image:
+        radial-gradient(circle 600px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, rgba(0, 0, 0, 0.15) 100%),
+        linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
 }
 
-.hero-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(40px);
-    opacity: 0.45;
+.river-svg {
+    width: 100%;
+    height: 100%;
 }
 
-.orb-left {
-    width: 420px;
-    height: 420px;
-    left: -120px;
-    top: 8%;
-    background: radial-gradient(circle, rgba(0, 179, 255, 0.3) 0%, rgba(0, 179, 255, 0.02) 68%);
+.wave {
+    fill: transparent;
+    stroke-linecap: round;
+    transition: stroke-width 0.4s ease, stroke-opacity 0.4s ease;
 }
 
-.orb-right {
-    width: 480px;
-    height: 480px;
-    right: -140px;
-    bottom: -80px;
-    background: radial-gradient(circle, rgba(0, 179, 255, 0.24) 0%, rgba(0, 179, 255, 0.01) 70%);
+.wave-bg {
+    stroke: var(--primary);
+    filter: blur(8px);
+    stroke-opacity: 0.12;
+    stroke-width: 1.5;
 }
 
-.hero-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 72px 72px;
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 78%);
-    opacity: 0.22;
-    animation: gridDrift 20s linear infinite;
+.wave-main {
+    stroke-width: 3.5;
+    /* More presence */
+    stroke-opacity: 0.4;
 }
 
-@keyframes gridDrift {
+.wave-detail {
+    stroke-width: 1.5;
+    stroke-opacity: 0.25;
+}
+
+/* Data Packets Intensified Glow */
+.data-packet {
+    filter: drop-shadow(0 0 12px currentColor);
+    opacity: 1;
+}
+
+/* Intense Neon Bloom */
+.wave-cyan {
+    stroke: #00f2ff;
+    filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.8));
+}
+
+.wave-blue {
+    stroke: #0ea5e9;
+    filter: drop-shadow(0 0 15px rgba(14, 165, 233, 0.7));
+}
+
+.wave-electric {
+    stroke: #3b82f6;
+    filter: drop-shadow(0 0 25px rgba(59, 130, 246, 0.8));
+}
+
+.wave-accent {
+    stroke: #6366f1;
+    filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.6));
+}
+
+/* Seamless Technical Flow */
+.wave-main,
+.wave-detail {
+    /* Pattern: 500px dash, 1000px gap = 1500px total */
+    stroke-dasharray: 500 1000;
+    /* Travel exactly 1500px (or multiple) for perfect reset */
+    animation: energyFlow 10s infinite linear;
+}
+
+@keyframes energyFlow {
     from {
-        transform: translateY(0);
+        stroke-dashoffset: 1500;
     }
 
     to {
-        transform: translateY(24px);
+        stroke-dashoffset: 0;
     }
+}
+
+/* Varied speeds and delays for natural chaos */
+.wave-cyan.wave-main {
+    animation-duration: 8s;
+    animation-delay: -1s;
+}
+
+.wave-blue.wave-main {
+    animation-duration: 12s;
+    animation-delay: -3s;
+}
+
+.wave-electric.wave-main {
+    animation-duration: 10s;
+    animation-direction: reverse;
+    animation-delay: -5s;
+}
+
+.wave-accent {
+    animation-duration: 18s;
+    stroke-opacity: 0.3;
+    animation-delay: -2s;
+}
+
+/* Vertically staggered delays for detail network */
+.wave-detail:nth-child(even) {
+    animation-delay: -4s;
+    animation-duration: 14s;
+}
+
+.wave-detail:nth-child(odd) {
+    animation-delay: -7s;
+    animation-duration: 16s;
 }
 
 .hero-container {
     position: relative;
-    z-index: 2;
+    z-index: 10;
     width: 100%;
 }
 
 .content-wrapper {
-    max-width: 960px;
+    max-width: 900px;
     margin: 0 auto;
     text-align: center;
 }
 
 .hero-title {
-    font-size: clamp(3rem, 6.9vw, 5.9rem);
-    margin-bottom: 20px;
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    margin-bottom: 24px;
     letter-spacing: -2px;
     font-family: 'Outfit', sans-serif;
     font-weight: 800;
-    line-height: 1.04;
-    text-wrap: balance;
 }
 
 .hero-subtitle {
-    font-size: clamp(1.02rem, 1.6vw, 1.22rem);
-    color: rgba(255, 255, 255, 0.84);
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--text-secondary);
     max-width: 700px;
-    margin: 0 auto 44px;
-    line-height: 1.78;
+    margin: 0 auto 40px;
 }
 
 .action-buttons {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     justify-content: center;
-    margin-bottom: 60px;
-}
-
-.action-buttons .btn {
-    min-width: 220px;
-}
-
-.action-buttons .btn-outline {
-    background: rgba(255, 255, 255, 0.02);
-}
-
-.hero-metrics {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    max-width: 920px;
-    margin: 0 auto;
-}
-
-.hero-metric {
-    background: rgba(255, 255, 255, 0.018);
-    border: 1px solid rgba(255, 255, 255, 0.075);
-    border-radius: 16px;
-    padding: 18px 20px;
-    text-align: left;
-    transition: transform 0.35s var(--ease-premium), border-color 0.35s var(--ease-premium), background 0.35s var(--ease-premium), box-shadow 0.35s var(--ease-premium);
-}
-
-.hero-metric strong {
-    display: block;
-    font-size: 0.92rem;
-    color: var(--text-primary);
-    margin-bottom: 6px;
-    font-weight: 600;
-}
-
-.hero-metric span {
-    display: block;
-    font-size: 0.82rem;
-    color: rgba(255, 255, 255, 0.66);
-    line-height: 1.5;
-}
-
-.hero-metric:hover {
-    transform: translateY(-3px);
-    border-color: rgba(0, 179, 255, 0.3);
-    background: rgba(0, 179, 255, 0.06);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    margin-bottom: 80px;
 }
 
 @media (max-width: 1024px) {
     .hero-section {
-        min-height: 92vh;
-        padding-top: 112px;
+        padding-top: 100px;
     }
 
-    .hero-metrics {
-        gap: 12px;
+    .hero-title {
+        letter-spacing: -1.5px;
     }
 }
 
 @media (max-width: 768px) {
     .hero-section {
-        min-height: 88vh;
-        padding-top: 98px;
-        padding-bottom: 70px;
+        padding-top: 90px;
+        min-height: 90vh;
     }
 
     .hero-title {
@@ -168,58 +193,48 @@
     }
 
     .hero-subtitle {
-        margin-bottom: 34px;
-        line-height: 1.7;
+        font-size: 1rem;
+        margin-bottom: 32px;
+        padding: 0 10px;
     }
 
     .action-buttons {
         flex-direction: column;
-        padding: 0 16px;
-        gap: 12px;
-        margin-bottom: 44px;
+        padding: 0 20px;
+        gap: 14px;
+        margin-bottom: 40px;
     }
 
     .action-buttons .btn {
         width: 100%;
-        min-width: 0;
-    }
-
-    .hero-metrics {
-        grid-template-columns: 1fr;
-        max-width: 560px;
-        margin: 0 auto;
-    }
-
-    .hero-grid {
-        opacity: 0.16;
-    }
-
-    .hero-metric {
         text-align: center;
+        justify-content: center;
+    }
+
+    .content-wrapper {
+        padding: 0 10px;
     }
 }
 
 @media (max-width: 480px) {
     .hero-section {
-        min-height: auto;
-        padding-top: 90px;
-        padding-bottom: 56px;
+        padding-top: 80px;
+        min-height: 85vh;
     }
 
     .hero-title {
-        font-size: clamp(2.1rem, 10vw, 3rem);
-        letter-spacing: -0.6px;
+        font-size: clamp(2.2rem, 10vw, 3.5rem);
+        letter-spacing: -0.5px;
+        margin-bottom: 18px;
     }
 
     .hero-subtitle {
-        font-size: 0.96rem;
+        font-size: 0.95rem;
+        line-height: 1.5;
     }
 
-    .hero-metric {
-        padding: 14px;
-    }
-
-    .hero-orb {
-        opacity: 0.3;
+    .action-buttons .btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
     }
 }
