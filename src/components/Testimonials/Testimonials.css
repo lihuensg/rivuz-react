@@ -1,6 +1,6 @@
 .testimonials-section {
     background-color: var(--bg-main);
-    padding: 120px 0;
+    padding: 140px 0;
     position: relative;
     border-top: 1px solid var(--glass-border);
 }
@@ -8,49 +8,51 @@
 .testimonials-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    max-width: 1200px;
+    gap: 34px;
+    max-width: 1140px;
     margin: 0 auto;
 }
 
 .testimonial-card {
-    padding: 40px;
+    padding: 44px 38px;
     display: flex;
     flex-direction: column;
-    transition: all 0.4s ease;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    position: relative;
 }
 
 .testimonial-card:hover {
     transform: translateY(-5px);
     border-color: rgba(0, 179, 255, 0.3);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
 }
 
 .quote-icon-wrapper {
     margin-bottom: 24px;
-    opacity: 0.8;
+    opacity: 0.88;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 179, 255, 0.2);
+    background: rgba(0, 179, 255, 0.07);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .quote-text {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--text-secondary);
+    font-size: 1.02rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.78);
     font-style: italic;
-    margin-bottom: 24px;
+    margin-bottom: 30px;
     flex-grow: 1;
-}
-
-.testimonial-rating {
-    margin-bottom: 0;
-    display: flex;
-    justify-content: flex-end;
-    flex-shrink: 0;
 }
 
 .client-meta {
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: flex-start;
     gap: 16px;
 }
 
@@ -71,7 +73,7 @@
 
 @media (max-width: 992px) {
     .testimonials-section {
-        padding: 100px 0;
+        padding: 112px 0;
     }
 
     .testimonials-grid {
@@ -82,7 +84,7 @@
 
 @media (max-width: 768px) {
     .testimonials-section {
-        padding: 80px 0;
+        padding: 94px 0;
     }
 
     .testimonials-grid {
@@ -93,13 +95,13 @@
     }
 
     .testimonial-card {
-        padding: 32px 28px;
+        padding: 36px 28px;
     }
 }
 
 @media (max-width: 480px) {
     .testimonials-section {
-        padding: 60px 0;
+        padding: 76px 0;
     }
 
     .testimonial-card {
@@ -121,11 +123,5 @@
 
     .client-meta {
         align-items: flex-start;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .testimonial-rating {
-        justify-content: flex-start;
     }
 }

@@ -82,6 +82,7 @@ const Pricing: React.FC = () => {
                 <h3 className="plan-name">{plan.name}</h3>
                 <p className="plan-desc">{plan.desc}</p>
               </div>
+              <div className="plan-divider" aria-hidden="true" />
               <ul className="features">
                 {plan.features.map((feature) => (
                   <li key={feature}>

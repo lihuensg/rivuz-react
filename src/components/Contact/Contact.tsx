@@ -20,19 +20,53 @@ const Contact: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [touched, setTouched] = useState<Record<keyof ContactForm, boolean>>({
+    name: false,
+    email: false,
+    company: false,
+    message: false,
+  });
 
   const serviceId = 'service_yxvt4dv';
   const templateId = 'template_pqh0qdy';
   const publicKey = 'ILsx05GQPOplnC0WI';
+
+  const validateField = (name: keyof ContactForm, value: string) => {
+    if (name === 'name' && value.trim().length < 3) return 'Ingresa un nombre válido.';
+    if (name === 'email' && !/^\S+@\S+\.\S+$/.test(value)) return 'Ingresa un email válido.';
+    if (name === 'message' && value.trim().length < 10) return 'Describe tu proyecto en al menos 10 caracteres.';
+    return '';
+  };
+
+  const fieldErrors = {
+    name: validateField('name', formData.name),
+    email: validateField('email', formData.email),
+    company: '',
+    message: validateField('message', formData.message),
+  };
+
+  const hasErrors = Boolean(fieldErrors.name || fieldErrors.email || fieldErrors.message);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+  };
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isLoading) return;
+
+    setTouched({ name: true, email: true, company: true, message: true });
+    if (hasErrors) {
+      setSubmitStatus('error');
+      setErrorMessage('Revisa los campos marcados antes de enviar.');
+      return;
+    }
 
     setIsLoading(true);
     setSubmitStatus('idle');
@@ -109,24 +143,30 @@ const Contact: React.FC = () => {
                     <input 
                       type="text" 
                       name="name"
-                      className="glow-input" 
+                      className={`glow-input ${touched.name && fieldErrors.name ? 'is-invalid' : ''} ${touched.name && !fieldErrors.name && formData.name ? 'is-valid' : ''}`}
                       placeholder="Apellido y nombre" 
                       required
                       value={formData.name}
                       onChange={handleChange}
+                      onBlur={handleBlur}
+                      aria-invalid={Boolean(touched.name && fieldErrors.name)}
                     />
+                    {touched.name && fieldErrors.name && <small className="field-error">{fieldErrors.name}</small>}
                   </div>
                   <div className="form-group">
                     <label>Email</label>
                     <input 
                       type="email" 
                       name="email"
-                      className="glow-input" 
+                      className={`glow-input ${touched.email && fieldErrors.email ? 'is-invalid' : ''} ${touched.email && !fieldErrors.email && formData.email ? 'is-valid' : ''}`}
                       placeholder="contacto@email.com" 
                       required
                       value={formData.email}
                       onChange={handleChange}
+                      onBlur={handleBlur}
+                      aria-invalid={Boolean(touched.email && fieldErrors.email)}
                     />
+                    {touched.email && fieldErrors.email && <small className="field-error">{fieldErrors.email}</small>}
                   </div>
                 </div>
                 <div className="form-group">
@@ -134,10 +174,11 @@ const Contact: React.FC = () => {
                   <input 
                     type="text" 
                     name="company"
-                    className="glow-input" 
+                    className="glow-input"
                     placeholder="Nombre de tu organización" 
                     value={formData.company}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                   />
                 </div>
                 <div className="form-group">
@@ -145,13 +186,16 @@ const Contact: React.FC = () => {
                   <textarea 
                     name="message"
                     rows={4} 
-                    className="glow-input" 
+                    className={`glow-input ${touched.message && fieldErrors.message ? 'is-invalid' : ''} ${touched.message && !fieldErrors.message && formData.message ? 'is-valid' : ''}`}
                     placeholder="Cuéntanos sobre tus necesidades técnicas o el producto que imaginas..."
                     required
                     minLength={10}
                     value={formData.message}
                     onChange={handleChange}
+                    onBlur={handleBlur}
+                    aria-invalid={Boolean(touched.message && fieldErrors.message)}
                   ></textarea>
+                  {touched.message && fieldErrors.message && <small className="field-error">{fieldErrors.message}</small>}
                 </div>
 
                 {submitStatus === 'error' && (

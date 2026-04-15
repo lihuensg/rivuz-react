@@ -1,12 +1,12 @@
 .contact-section {
     background-color: var(--bg-secondary);
-    padding: 120px 0;
+    padding: 140px 0;
 }
 
 .contact-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: 96px;
     align-items: center;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .contact-form-container {
-    padding: 48px;
+    padding: 52px;
 }
 
 .form-row {
@@ -53,7 +53,7 @@
 }
 
 .form-group {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
@@ -73,7 +73,7 @@
     color: white;
     font-size: 1rem;
     font-family: inherit;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s var(--ease-premium), box-shadow 0.3s var(--ease-premium), background 0.3s var(--ease-premium);
 }
 
 .glow-input:focus {
@@ -81,6 +81,28 @@
     border-color: var(--primary);
     background: rgba(255, 255, 255, 0.05);
     box-shadow: 0 0 15px rgba(0, 179, 255, 0.2);
+}
+
+.glow-input::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.glow-input.is-invalid {
+    border-color: rgba(239, 68, 68, 0.85);
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+.glow-input.is-valid {
+    border-color: rgba(16, 185, 129, 0.72);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+}
+
+.field-error {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.78rem;
+    color: #fca5a5;
+    line-height: 1.4;
 }
 
 textarea.glow-input {
@@ -108,8 +130,8 @@ textarea.glow-input {
 }
 
 .form-error-banner {
-    background: rgba(ef, 68, 68, 0.1);
-    border: 1px solid rgba(ef, 68, 68, 0.3);
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
     color: #ef4444;
     padding: 12px;
     border-radius: 8px;
@@ -118,6 +140,12 @@ textarea.glow-input {
     align-items: center;
     gap: 10px;
     font-size: 0.9rem;
+}
+
+.contact-form button[disabled] {
+    opacity: 0.82;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .loading-indicator {
@@ -136,7 +164,7 @@ textarea.glow-input {
 
 @media (max-width: 992px) {
     .contact-section {
-        padding: 100px 0;
+        padding: 112px 0;
     }
 
     .contact-wrapper {
@@ -155,7 +183,7 @@ textarea.glow-input {
 
 @media (max-width: 768px) {
     .contact-section {
-        padding: 80px 0;
+        padding: 94px 0;
     }
 
     .contact-wrapper {
@@ -163,7 +191,7 @@ textarea.glow-input {
     }
 
     .contact-form-container {
-        padding: 36px 24px;
+        padding: 40px 26px;
     }
 
     .section-title {
@@ -173,7 +201,7 @@ textarea.glow-input {
 
 @media (max-width: 576px) {
     .contact-section {
-        padding: 60px 0;
+        padding: 76px 0;
     }
 
     .contact-form-container {
