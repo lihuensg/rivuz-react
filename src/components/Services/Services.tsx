@@ -11,7 +11,7 @@ const Services: React.FC = () => {
             Soluciones tecnológicas que <span className="text-gradient">impulsan tu negocio</span>
           </h2>
           <p className="section-subtitle">
-            Diseñamos y desarrollamos software, plataformas y soluciones digitales que optimizan procesos, conectan sistemas y ayudan a las empresas a crecer con tecnología confiable.
+            Desarrollamos soluciones digitales que ayudan a las empresas a crecer con tecnología confiable.
           </p>
         </div>
 
