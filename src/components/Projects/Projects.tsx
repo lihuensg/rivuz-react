@@ -74,9 +74,9 @@ const Projects: React.FC = () => {
       <div className="container">
         <div className="section-header" data-aos="fade-up">
           <span className="section-tag">Logros</span>
-          <h2 className="section-title">Portafolio <span className="text-gradient-muted">Destacado</span></h2>
+          <h2 className="section-title">Proyectos <span className="text-gradient-muted">Destacados</span></h2>
           <p className="section-subtitle">
-            Casos de éxito donde nuestra ingeniería transformó visión en rentabilidad.
+            Casos de éxito donde nuestra ingeniería transformó.
           </p>
         </div>
         <div className="projects-orbit" data-aos="fade-up" data-aos-delay="200">

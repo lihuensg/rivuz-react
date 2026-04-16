@@ -13,30 +13,29 @@ interface TeamMember {
 
 const teamMembers: TeamMember[] = [
   {
-    name: 'Lihuel Gonzalez',
-    role: 'Co-Founder & Full Stack Developer',
+    name: 'Juan Cruz del Valle',
+    role: 'Full Stack Developer',
     image: '/images/team/member-1.png',
     socials: {
-      linkedin: '#',
+      linkedin: 'https://www.linkedin.com/in/juancruzdelvalle/',
       github: '#',
     },
   },
   {
-    name: 'Valentina Ruiz',
-    role: 'UI/UX Designer & Frontend Developer',
+    name: 'Lihuen Segovia Grabois',
+    role: 'Information Systems Engineer',
     image: '/images/team/member-2.png',
     socials: {
-      linkedin: '#',
-      github: '#',
+      linkedin: 'https://www.linkedin.com/in/lihuen-segovia-grabois/',
+      github: 'https://github.com/lihuensg',
     },
   },
   {
-    name: 'Matías Torres',
-    role: 'Backend Engineer & DevOps',
+    name: 'Rodrigo Mignola',
+    role: 'Information Systems Engineer',
     image: '/images/team/member-3.png',
     socials: {
-      linkedin: '#',
-      github: '#',
+      linkedin: 'https://www.linkedin.com/in/rmignola/',
     },
   },
 ];
@@ -58,7 +57,7 @@ const Nosotros: React.FC = () => {
             <span className="text-gradient">solución</span>
           </h2>
           <p className="section-subtitle">
-            Somos un equipo multidisciplinario apasionado por la tecnología, comprometido con crear productos digitales que generan impacto real en los negocios de nuestros clientes.
+            Somos un equipo apasionado y comprometido en generar impacto real.
           </p>
         </div>
 
@@ -69,9 +68,8 @@ const Nosotros: React.FC = () => {
             {teamMembers.map((member, index) => (
               <div
                 key={member.name}
-                className={`photo-card ${
-                  activeIndex === index ? 'active' : ''
-                } ${activeIndex !== null && activeIndex !== index ? 'dimmed' : ''}`}
+                className={`photo-card ${activeIndex === index ? 'active' : ''
+                  } ${activeIndex !== null && activeIndex !== index ? 'dimmed' : ''}`}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
               >
@@ -89,9 +87,8 @@ const Nosotros: React.FC = () => {
             {teamMembers.map((member, index) => (
               <div
                 key={member.name}
-                className={`team-member-item ${
-                  activeIndex === index ? 'active' : ''
-                } ${activeIndex !== null && activeIndex !== index ? 'dimmed' : ''}`}
+                className={`team-member-item ${activeIndex === index ? 'active' : ''
+                  } ${activeIndex !== null && activeIndex !== index ? 'dimmed' : ''}`}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
               >
